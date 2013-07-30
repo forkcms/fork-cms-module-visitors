@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<name>visitors</name>
+	<version>1.0.0</version>
+	<requirements>
+		<minimum_version>3.4.0</minimum_version>
+	</requirements>
+	<description>
+		<![CDATA[
+			This module allows you to show items from other modules on a map.
+			If analytics is coupled, you can show the visitors from your site on the map too.
+		]]>
+	</description>
+	<authors>
+		<author>
+			<name><![CDATA[Wouter Sioen]]></name>
+			<url><![CDATA[http://www.woutersioen.be]]></url>
+		</author>
+	</authors>
+	<events>
+		<event application="backend" name="after_add"><![CDATA[Triggered when an item is added.]]></event>
+		<event application="backend" name="after_delete"><![CDATA[Triggered when an item is deleted.]]></event>
+		<event application="backend" name="after_edit"><![CDATA[Triggered when an item is edited.]]></event>
+		<event application="backend" name="after_save_settings"><![CDATA[Triggered when the settings are saved.]]></event>
+	</events>
+</module>

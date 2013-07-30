@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<locale>
+	<backend>
+		<visitors>
+			<item type="label" name="Authenticate">
+				<translation language="nl"><![CDATA[geef Fork toegang tot uw Google Analytics data]]></translation>
+				<translation language="en"><![CDATA[grant access to your Google Analytics data]]></translation>
+			</item>
+			<item type="label" name="ClientId">
+				<translation language="nl"><![CDATA[Google Analytics client id]]></translation>
+				<translation language="en"><![CDATA[Google Analytics client id]]></translation>
+			</item>
+			<item type="label" name="ClientSecret">
+				<translation language="nl"><![CDATA[Google Analytics client secret]]></translation>
+				<translation language="en"><![CDATA[Google Analytics client secret]]></translation>
+			</item>
+			<item type="label" name="Map">
+				<translation language="nl"><![CDATA[kaart]]></translation>
+				<translation language="en"><![CDATA[map]]></translation>
+			</item>
+			<item type="label" name="ModuleItem">
+				<translation language="nl"><![CDATA[gelinkte item]]></translation>
+				<translation language="en"><![CDATA[linked item]]></translation>
+			</item>
+			<item type="label" name="UnlinkAnalytics">
+				<translation language="nl"><![CDATA[ontkoppel analytics profiel]]></translation>
+				<translation language="en"><![CDATA[unlink analytics profile]]></translation>
+			</item>
+			<item type="label" name="UseAnalytics">
+				<translation language="nl"><![CDATA[toon bezoekers uit de analytics module]]></translation>
+				<translation language="en"><![CDATA[show visitors from the analytics module]]></translation>
+			</item>
+			<item type="message" name="ConfirmUnlink">
+				<translation language="nl"><![CDATA[Ben je zeker dat je het gekozen analytics profiel wil ontkoppelen?]]></translation>
+				<translation language="en"><![CDATA[Are you sure you want to unlink the chosen analytics profile?]]></translation>
+			</item>
+		</visitors>
+		<core>
+			<item type="label" name="Visitors">
+				<translation language="nl"><![CDATA[bezoekers]]></translation>
+				<translation language="en"><![CDATA[visitors]]></translation>
+			</item>
+		</core>
+	</backend>
+	<frontend>
+		<core>
+		</core>
+	</frontend>
+</locale>
