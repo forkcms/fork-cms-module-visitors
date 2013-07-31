@@ -34,6 +34,7 @@ class BackendVisitorsModel
 	{
 		// delete item
 		BackendModel::getContainer()->get('database')->delete('visitors', 'id = ?', (int) $id);
+		BackendModel::invalidateFrontendCache('visitors', BL::getWorkingLanguage());
 	}
 
 	/**
@@ -93,6 +94,7 @@ class BackendVisitorsModel
 	public static function insert($item)
 	{
 		$item['created_on'] = BackendModel::getUTCDate();
+		BackendModel::invalidateFrontendCache('visitors', BL::getWorkingLanguage());
 
 		return BackendModel::getContainer()->get('database')->insert('visitors', $item);
 	}
@@ -105,6 +107,7 @@ class BackendVisitorsModel
 	public static function update($item)
 	{
 		$item['edited_on'] = BackendModel::getUTCDate();
+		BackendModel::invalidateFrontendCache('visitors', BL::getWorkingLanguage());
 
 		BackendModel::getContainer()->get('database')->update(
 			'visitors', $item, 'id = ?', (int) $item['id']
