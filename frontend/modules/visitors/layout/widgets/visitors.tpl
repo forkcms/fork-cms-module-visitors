@@ -1,4 +1,4 @@
-{cache:{$LANGUAGE}_visitorsWidget}
+{cache:{$cacheName}}
 	<div class="col-12">
 		<div id="map" style="height: 600px; width: 100%;">
 		</div>
@@ -35,4 +35,4 @@
 			var visitors = [{iteration:visitors}{lat: {$visitors.latitude}, lng: {$visitors.longitude}, time: {$visitors.visitLength}}{option:!visitors.last},{/option:!visitors.last}{/iteration:visitors}];
 		{/option:visitors}
 	</script>
-{/cache:{$LANGUAGE}_visitorsWidget}
+{/cache:{$cacheName}}

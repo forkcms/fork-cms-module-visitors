@@ -41,9 +41,11 @@ class FrontendVisitorsWidgetVisitors extends FrontendBaseWidget
 
 		// this calculates the amount of seconds until the next hour starts
 		$cachedTime = - (time() % 3600) + 3600;
-		$this->tpl->cache(FRONTEND_LANGUAGE . '_visitorsWidget', $cachedTime);
+		$cacheName = FRONTEND_LANGUAGE . '_visitorsWidget_' . (string) (time() + $cachedTime);
+		$this->tpl->assign('cacheName', $cacheName);
+		$this->tpl->cache($cacheName, $cachedTime);
 
-		if(!$this->tpl->isCached(FRONTEND_LANGUAGE . '_visitorsWidget'))
+		if(!$this->tpl->isCached($cacheName))
 		{
 			$this->getData();
 			$this->parse();
