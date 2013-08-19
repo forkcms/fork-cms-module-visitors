@@ -13,9 +13,9 @@ jsBackend.visitors =
 	{
 		if(typeof markers != 'undefined' && typeof mapOptions != 'undefined') jsBackend.visitors.showMap();
 
-		if($('#account, #property, #profile').length > 0 && $.isFunction($.fn.select2))
+		if($('#item, #account, #property, #profile').length > 0 && $.isFunction($.fn.select2))
 		{
-			$('select#account, select#property, select#profile').select2();
+			$('select#item, select#account, select#property, select#profile').select2();
 		}
 	},
 

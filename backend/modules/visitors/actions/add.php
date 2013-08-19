@@ -40,23 +40,44 @@ class BackendVisitorsAdd extends BackendBaseActionAdd
 	{
 		$this->frm = new BackendForm('add');
 
-		// fetch items we can use in this module. They will be fetched from their helper class
-		foreach(BackendModel::getModulesForDropDown() as $module => $label)
+		// if a module is given, fetch all items for this module
+		$module = $this->getParameter('module', 'string');
+		$helper = 'Backend' . SpoonFilter::toCamelCase($module) . 'Visitors';
+		if($module && is_callable(array($helper, 'getForVisitors')))
 		{
-			// check if the module can be used by the visitors moudle
-			$helper = 'Backend' . SpoonFilter::toCamelCase($module) . 'Visitors';
-			if(is_callable(array($helper, 'getForVisitors')))
+			$this->items = array_merge($this->items, $helper::getForVisitors());
+		}
+		else
+		{
+			// fetch all items we can use in this module. They will be fetched from their helper class
+			foreach(BackendModel::getModulesForDropDown() as $module => $label)
 			{
-				$this->items = array_merge($this->items, $helper::getForVisitors());
+				// check if the module can be called by the visitors module
+				$helper = 'Backend' . SpoonFilter::toCamelCase($module) . 'Visitors';
+				if(is_callable(array($helper, 'getForVisitors')))
+				{
+					$this->items = array_merge($this->items, $helper::getForVisitors());
+				}
 			}
 		}
-		$this->frm->addDropdown('item', $this->items)->setDefaultElement('');
 
+		$this->frm->addDropdown('item', $this->items)->setDefaultElement('');
 		$this->frm->addText('street');
 		$this->frm->addText('number');
 		$this->frm->addText('zip');
 		$this->frm->addText('city');
 		$this->frm->addDropdown('country', SpoonLocale::getCountries(BL::getInterfaceLanguage()), 'BE');
+	}
+
+	/**
+	 * Parse the data into the template
+	 */
+	protected function parse()
+	{
+		parent::parse();
+
+		$this->header->addJS('select2.min.js');
+		$this->header->addCSS('select2.css', $this->getModule());
 	}
 
 	/**

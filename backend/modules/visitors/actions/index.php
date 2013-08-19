@@ -15,6 +15,11 @@
 class BackendVisitorsIndex extends BackendBaseActionIndex
 {
 	/**
+	 * @var array
+	 */
+	private $modules;
+
+	/**
 	 * Execute the action
 	 */
 	public function execute()
@@ -37,10 +42,28 @@ class BackendVisitorsIndex extends BackendBaseActionIndex
 	{
 		$editUrl = BackendModel::createURLForAction('edit') . '&amp;id=[id]';
 
-		$this->dataGrid = new BackendDataGridDB(BackendVisitorsModel::QRY_BROWSE, array(BL::getWorkingLanguage()));
-		$this->dataGrid->setSortingColumns(array('title', 'module', 'location'), 'title');
-		$this->dataGrid->addColumn('edit', null, BL::lbl('Edit'), $editUrl, BL::lbl('Edit'));
-		$this->dataGrid->setColumnURL('title', $editUrl);
+		// check which modules implemented the visitorsInterface
+		$this->modules = array();
+		foreach(BackendModel::getModulesForDropDown() as $module => $label)
+		{
+			// check if the module can be used by the visitors moudle
+			$helper = 'Backend' . SpoonFilter::toCamelCase($module) . 'Visitors';
+			if(is_callable(array($helper, 'getForVisitors')))
+			{
+				// create the datagrid with items for this module
+				$dataGrid = new BackendDataGridDB(BackendVisitorsModel::QRY_BROWSE, array($module, BL::getWorkingLanguage()));
+				$dataGrid->setSortingColumns(array('title', 'location'), 'title');
+				$dataGrid->addColumn('edit', null, BL::lbl('Edit'), $editUrl, BL::lbl('Edit'));
+				$dataGrid->setColumnURL('title', $editUrl);
+
+				// add it to the modules array
+				$this->modules[] = array(
+					'label' => $label,
+					'module' => $module,
+					'dataGrid' => (string) $dataGrid->getContent()
+				);
+			}
+		}
 	}
 
 	/**
@@ -50,6 +73,6 @@ class BackendVisitorsIndex extends BackendBaseActionIndex
 	{
 		// parse the dataGrid if there are results
 		$this->tpl->assign('items', BackendVisitorsModel::getAll());
-		$this->tpl->assign('dataGrid', (string) $this->dataGrid->getContent());
+		$this->tpl->assign('modules', (string) $this->modules);
 	}
 }

@@ -20,10 +20,10 @@ class BackendVisitorsModel
 	 * @var string
 	 */
 	const QRY_BROWSE =
-		'SELECT v.id, v.title, v.module,
+		'SELECT v.id, v.title,
 		 CONCAT(v.street, " ", v.number, ", ", v.city) AS location
 		 FROM visitors AS v
-		 WHERE v.language = ?';
+		 WHERE v.module = ? AND v.language = ?';
 
 	/**
 	 * Delete an item

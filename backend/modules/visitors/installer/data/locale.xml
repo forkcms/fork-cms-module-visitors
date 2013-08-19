@@ -34,6 +34,10 @@
 				<translation language="nl"><![CDATA[Ben je zeker dat je het gekozen analytics profiel wil ontkoppelen?]]></translation>
 				<translation language="en"><![CDATA[Are you sure you want to unlink the chosen analytics profile?]]></translation>
 			</item>
+			<item type="error" name="NoCoupledModules">
+				<translation language="nl"><![CDATA[Er zijn geen modules aanwezig die gekoppeld kunnen worden aan de bezoekers module.]]></translation>
+				<translation language="en"><![CDATA[There are no modules that are able to be coupled to the visitors module.]]></translation>
+			</item>
 		</visitors>
 		<core>
 			<item type="label" name="Visitors">

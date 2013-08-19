@@ -5,14 +5,9 @@
 	<h2>
 		{$lblVisitors|ucfirst}
 	</h2>
-	<div class="buttonHolderRight">
-		<a href="{$var|geturl:'add'}" class="button icon iconAdd" title="{$lblAdd|ucfirst}">
-			<span>{$lblAdd|ucfirst}</span>
-		</a>
-	</div>
 </div>
 
-{option:dataGrid}
+{option:items}
 	<div class="box">
 		<div class="heading">
 			<h3>{$lblMap|ucfirst}</h3>
@@ -23,10 +18,29 @@
 		</div>
 	</div>
 
-	<div class="dataGridHolder">
-		{$dataGrid}
+	{option:modules}
+		{iteration:modules}
+			<div class="pageTitle">
+				<h2>
+					{$modules.label}
+				</h2>
+				<div class="buttonHolderRight">
+					<a href="{$var|geturl:'add'}&module={$modules.module}" class="button icon iconAdd" title="{$lblAdd|ucfirst}">
+						<span>{$lblAdd|ucfirst}</span>
+					</a>
+				</div>
+			</div>
+			<div class="dataGridHolder">
+				{$modules.dataGrid}
+			</div>
+		{/iteration:modules}
+	{/option:modules}
+{/option:items}
+{option:!modules}
+	<div class="generalMessage infoMessage content">
+		<p class="pb0"><strong>{$errNoCoupledModules}</strong></p>
 	</div>
-{/option:dataGrid}
+{/option:!modules}
 
 <script type="text/javascript">
 	var mapOptions = {
@@ -50,9 +64,9 @@
 	{/iteration:items}
 </script>
 
-{option:!dataGrid}
+{option:!items}
 	{$msgNoItems}
-{/option:!dataGrid}
+{/option:!items}
 
 {include:{$BACKEND_CORE_PATH}/layout/templates/structure_end_module.tpl}
 {include:{$BACKEND_CORE_PATH}/layout/templates/footer.tpl}
