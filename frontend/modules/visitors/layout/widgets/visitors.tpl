@@ -34,5 +34,8 @@
 		{option:visitors}
 			var visitors = [{iteration:visitors}{lat: {$visitors.latitude}, lng: {$visitors.longitude}, time: {$visitors.visitLength}}{option:!visitors.last},{/option:!visitors.last}{/iteration:visitors}];
 		{/option:visitors}
+		{option:!visitors}
+			var visitors = [];
+		{/option:!visitors}
 	</script>
 {/cache:{$cacheName}}

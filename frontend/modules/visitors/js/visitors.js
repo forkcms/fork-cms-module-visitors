@@ -128,7 +128,7 @@ jsFrontend.visitors =
 		}
 
 		// add the first visitor immediatly when the map is initialised
-		addVisitorToMap();
+		if(visitors.length > 0) addVisitorToMap();
 
 		/*
 			let's determine the max and min time before the appearance of a new pin
