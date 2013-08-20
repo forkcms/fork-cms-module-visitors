@@ -91,7 +91,7 @@ class BackendVisitorsEdit extends BackendBaseActionEdit
 	{
 		parent::parse();
 
-		$this->header->addJS('select2.min.js');
+		$this->header->addJS('select2.min.js', null, false);
 		$this->header->addCSS('select2.css', $this->getModule());
 
 		// assign to template
