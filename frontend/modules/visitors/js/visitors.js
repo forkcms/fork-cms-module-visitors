@@ -125,7 +125,7 @@ jsFrontend.visitors =
 				position: new google.maps.LatLng(item.lat, item.lng),
 				map: jsFrontend.visitors.map,
 				animation: google.maps.Animation.DROP,
-				icon: '/frontend/modules/visitors/layout/images/visitor.png',
+				icon: '/frontend/files/visitors/grey.png',
 				shadow: visitorsShadow
 			});
 
