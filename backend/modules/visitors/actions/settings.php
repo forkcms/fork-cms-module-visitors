@@ -28,12 +28,14 @@ class BackendVisitorsSettings extends BackendBaseActionEdit
 	 * Analytics accounts
 	 * Analytics web properties
 	 * Analytics profiles
+	 * Modules that implement the visitors module
 	 * 
 	 * @var array
 	 */
 	private $accounts = array();
 	private $webProperties = array();
 	private $profiles = array();
+	private $modules = array();
 
 	/**
 	 * Are all settings filled
@@ -220,6 +222,34 @@ class BackendVisitorsSettings extends BackendBaseActionEdit
 			}
 			$this->frm->addDropdown('profile', $dropdownProfiles);
 		}
+
+		// check which modules implemented the visitorsInterface
+		$this->modules = array();
+		foreach(BackendModel::getModulesForDropDown() as $module => $label)
+		{
+			// check if the module can be used by the visitors moudle
+			$helper = 'Backend' . SpoonFilter::toCamelCase($module) . 'Visitors';
+			if(is_callable(array($helper, 'getForVisitors')))
+			{
+				// add it to the modules array
+				$this->modules[$module] = $label;
+			}
+		}
+
+		$images = SpoonDirectory::getList(FRONTEND_FILES_PATH . '/' . $this->getModule() . '/', true);
+
+		// loop trough modules and add a form with the chosen marker
+		foreach($this->modules as $module => $label)
+		{
+			$default = BackendModel::getModuleSetting($this->getModule(), 'marker_' . $module, null);
+			$default = array_search($default, $images);
+			$this->frm->addDropdown($module, $images, $default);
+			$this->modules[$module] = array(
+				'label' => $label,
+				'module' => $module,
+				'field' => $this->frm->getField($module)->parse()
+			);
+		}
 	}
 
 	protected function parse()
@@ -228,9 +258,11 @@ class BackendVisitorsSettings extends BackendBaseActionEdit
 
 		$this->tpl->assign('authUrl', (string) $this->authUrl);
 		$this->tpl->assign('complete', $this->complete);
+		$this->tpl->assign('modules', $this->modules);
 
 		$this->header->addJS('select2.min.js', null, false);
 		$this->header->addCSS('select2.css', $this->getModule());
+		$this->header->addCSS('visitors.css', $this->getModule());
 	}
 
 	/**
@@ -249,6 +281,13 @@ class BackendVisitorsSettings extends BackendBaseActionEdit
 				BackendModel::setModuleSetting($this->getModule(), 'analytics', (bool) $fields['analytics']->getValue());
 				BackendModel::setModuleSetting($this->getModule(), 'client_id', $fields['client_id']->getValue());
 				BackendModel::setModuleSetting($this->getModule(), 'client_secret', $fields['client_secret']->getValue());
+
+				$images = SpoonDirectory::getList(FRONTEND_FILES_PATH . '/' . $this->getModule() . '/', true);
+				foreach($this->modules as $module)
+				{
+					$selected = $images[$fields[$module['module']]->getValue()];
+					BackendModel::setModuleSetting($this->getModule(), 'marker_' . $module['module'], $selected);
+				}
 
 				if(array_key_exists('account', $fields))
 				{

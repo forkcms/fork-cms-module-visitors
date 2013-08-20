@@ -16,17 +16,32 @@ jsFrontend.visitors =
 
 	addMarker: function(map, bounds, object)
 	{
+		var icon = window['marker_' + object.module];
+
 		// create position and add to boundaries
 		var position = new google.maps.LatLng(object.lat, object.lng);
 		bounds.extend(position);
 
 		// add marker
-		var marker = new google.maps.Marker(
+		if(icon)
 		{
-			position: position,
-			map: map,
-			title: object.title
-		});
+			var marker = new google.maps.Marker(
+			{
+				icon: icon,
+				position: position,
+				map: map,
+				title: object.title
+			});
+		}
+		else
+		{
+			var marker = new google.maps.Marker(
+			{
+				position: position,
+				map: map,
+				title: object.title
+			});
+		}
 
 		// add click event on marker to show an info window
 		google.maps.event.addListener(marker, 'click', function()

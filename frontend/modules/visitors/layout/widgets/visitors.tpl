@@ -24,7 +24,8 @@
 							lat: {$items.lat},
 							lng: {$items.lng},
 							title: '{$items.title}',
-							url: '{$items.url}'
+							url: '{$items.url}',
+							module: '{$items.module}'
 						});
 					{/option:items.lng}
 				{/option:items.lat}
@@ -37,5 +38,10 @@
 		{option:!visitors}
 			var visitors = [];
 		{/option:!visitors}
+		{option:modules}
+			{iteration:modules}
+				var marker_{$modules.module} = '{$modules.image}';
+			{/iteration:modules}
+		{/option:modules}
 	</script>
 {/cache:{$cacheName}}

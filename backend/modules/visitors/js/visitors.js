@@ -13,9 +13,24 @@ jsBackend.visitors =
 	{
 		if(typeof markers != 'undefined' && typeof mapOptions != 'undefined') jsBackend.visitors.showMap();
 
-		if($('#item, #account, #property, #profile').length > 0 && $.isFunction($.fn.select2))
+		if($('.box select').length > 0 && $.isFunction($.fn.select2))
 		{
-			$('select#item, select#account, select#property, select#profile').select2();
+			$('.box select').select2();
+		}
+
+		if($('#modules select').length > 0 && $.isFunction($.fn.select2))
+		{
+			function format(state) {
+				if(!state.id) return state.text; // optgroup
+				return '<img class="marker" src="/frontend/files/visitors/' + state.text + '"/><span>' + state.text + '</span>';
+			}
+
+			$('#modules select').select2({
+				formatResult: format,
+				formatSelection: format,
+				width: '200px',
+				escapeMarkup: function(m) { return m; }
+			});
 		}
 	},
 

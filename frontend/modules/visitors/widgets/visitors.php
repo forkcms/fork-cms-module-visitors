@@ -29,6 +29,13 @@ class FrontendVisitorsWidgetVisitors extends FrontendBaseWidget
 	private $visitors = array();
 
 	/**
+	 * The modules
+	 * 
+	 * @var array
+	 */
+	private $modules = array();
+
+	/**
 	 * Exceute the action
 	 */
 	public function execute()
@@ -65,6 +72,16 @@ class FrontendVisitorsWidgetVisitors extends FrontendBaseWidget
 			if(method_exists($helper, 'getUrlForVisitors'))
 			{
 				$this->items[$key]['url'] = $helper::getUrlForVisitors($item['extra_id']);
+
+				// add the module to the modules array if necessary
+				if(!array_key_exists($item['module'], $this->modules))
+				{
+					$image = FrontendModel::getModuleSetting('visitors', 'marker_' . $item['module'], null);
+					$this->modules[$item['module']] = array(
+						'module' => $item['module'],
+						'image' => $image ? FRONTEND_FILES_URL . '/visitors/' . $image : null
+					);
+				}
 			}
 			else unset($this->items[$key]);
 		}
@@ -79,5 +96,6 @@ class FrontendVisitorsWidgetVisitors extends FrontendBaseWidget
 	{
 		$this->tpl->assign('items', $this->items);
 		$this->tpl->assign('visitors', $this->visitors);
+		$this->tpl->assign('modules', $this->modules);
 	}
 }

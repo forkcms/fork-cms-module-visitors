@@ -47,6 +47,22 @@
 		{/option:!complete}
 	</div>
 
+	{option:modules}
+		<div id="modules" class="box horizontal">
+			<div class="heading">
+				<h3>{$lblMarkers|ucfirst}</h3>
+			</div>
+			<div class="options">
+				{iteration:modules}
+					<p>
+						<label for="clientId">{$modules.label}</label>
+						{$modules.field}
+					</p>
+				{/iteration:modules}
+			</div>
+		</div>
+	{/option:modules}
+
 	<div class="fullwidthOptions">
 		<div class="buttonHolderRight">
 			<input id="save" class="inputButton button mainButton" type="submit" name="save" value="{$lblSave|ucfirst}" />

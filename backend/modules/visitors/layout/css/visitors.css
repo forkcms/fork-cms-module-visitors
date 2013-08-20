@@ -1,0 +1,14 @@
+.select2-container .marker,
+.select2-drop .marker {
+    height: 20px;
+    float: left;
+    padding-right: 5px;
+}
+
+.select2-container .marker {
+    padding-top: 3px;
+}
+
+.select2-drop li {
+    padding: 3px 0;
+}

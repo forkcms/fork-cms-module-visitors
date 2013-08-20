@@ -18,6 +18,10 @@
 				<translation language="nl"><![CDATA[kaart]]></translation>
 				<translation language="en"><![CDATA[map]]></translation>
 			</item>
+			<item type="label" name="Markers">
+				<translation language="nl"><![CDATA[markers]]></translation>
+				<translation language="en"><![CDATA[markers]]></translation>
+			</item>
 			<item type="label" name="ModuleItem">
 				<translation language="nl"><![CDATA[gelinkte item]]></translation>
 				<translation language="en"><![CDATA[linked item]]></translation>
