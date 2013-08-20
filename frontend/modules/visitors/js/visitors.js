@@ -130,6 +130,9 @@ jsFrontend.visitors =
 		// add the first visitor immediatly when the map is initialised
 		if(visitors.length > 0) addVisitorToMap();
 
+		// if we have more then 10 visitors, add two off them tot the map imediatly
+		if(visitors.length > 10) addVisitorToMap();
+
 		/*
 			let's determine the max and min time before the appearance of a new pin
 			Calculation: 300 seconds / amount of pins = basic Interval to see all pins in 5 minutes
