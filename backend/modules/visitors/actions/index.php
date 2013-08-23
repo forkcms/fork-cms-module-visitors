@@ -56,11 +56,15 @@ class BackendVisitorsIndex extends BackendBaseActionIndex
 				$dataGrid->addColumn('edit', null, BL::lbl('Edit'), $editUrl, BL::lbl('Edit'));
 				$dataGrid->setColumnURL('title', $editUrl);
 
+				// check if an image was set
+				$image = FrontendModel::getModuleSetting('visitors', 'marker_' . $module, null);
+
 				// add it to the modules array
 				$this->modules[] = array(
 					'label' => $label,
 					'module' => $module,
-					'dataGrid' => (string) $dataGrid->getContent()
+					'dataGrid' => (string) $dataGrid->getContent(),
+					'image' => $image ? FRONTEND_FILES_URL . '/visitors/' . $image : null
 				);
 			}
 		}

@@ -36,6 +36,8 @@ jsBackend.visitors =
 
 	addMarker: function(map, bounds, object)
 	{
+		var icon = window['marker_' + object.module];
+
 		// create position
 		position = new google.maps.LatLng(object.lat, object.lng);
 
@@ -43,15 +45,32 @@ jsBackend.visitors =
 		bounds.extend(position);
 
 		// add marker
-		var marker = new google.maps.Marker(
+		if(icon)
 		{
-			// set position
-			position: position,
-			// add to map
-			map: map,
-			// set title
-			title: object.title
-		});
+			var marker = new google.maps.Marker(
+			{
+				// set position
+				position: position,
+				// add to map
+				map: map,
+				// set title
+				title: object.title,
+				// set icon
+				icon: icon
+			});
+		}
+		else
+		{
+			var marker = new google.maps.Marker(
+			{
+				// set position
+				position: position,
+				// add to map
+				map: map,
+				// set title
+				title: object.title
+			});
+		}
 
 		// add click event on marker
 		google.maps.event.addListener(marker, 'click', function()

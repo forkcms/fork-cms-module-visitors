@@ -57,11 +57,18 @@
 				markers.push({
 					lat: {$items.lat},
 					lng: {$items.lng},
-					title: '{$items.title}'
+					title: '{$items.title}',
+					module: '{$items.module}'
 				});
 			{/option:items.lng}
 		{/option:items.lat}
 	{/iteration:items}
+
+	{option:modules}
+		{iteration:modules}
+			var marker_{$modules.module} = '{$modules.image}';
+		{/iteration:modules}
+	{/option:modules}
 </script>
 
 {option:!items}
