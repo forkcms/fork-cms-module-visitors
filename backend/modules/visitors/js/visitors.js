@@ -32,6 +32,13 @@ jsBackend.visitors =
 				escapeMarkup: function(m) { return m; }
 			});
 		}
+
+		// toggle datagrids
+		$('#modules h2 a').on('click', function(e){
+			e.preventDefault();
+			$(this).toggleClass('iconCollapsed').toggleClass('iconExpanded');
+			$(this).closest('.pageTitle').siblings('.dataGridHolder').slideToggle(200);
+		});
 	},
 
 	addMarker: function(map, bounds, object)

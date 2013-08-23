@@ -12,3 +12,7 @@
 .select2-drop li {
     padding: 3px 0;
 }
+
+#modules h2 {
+    cursor: pointer;
+}

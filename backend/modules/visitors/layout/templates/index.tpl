@@ -19,21 +19,23 @@
 	</div>
 
 	{option:modules}
-		{iteration:modules}
-			<div class="pageTitle">
-				<h2>
-					{$modules.label}
-				</h2>
-				<div class="buttonHolderRight">
-					<a href="{$var|geturl:'add'}&module={$modules.module}" class="button icon iconAdd" title="{$lblAdd|ucfirst}">
-						<span>{$lblAdd|ucfirst}</span>
-					</a>
+		<div id="modules">
+			{iteration:modules}
+				<div class="pageTitle">
+					<h2>
+						<a href="#" class="icon iconCollapsed"><span>{$modules.label}</span></a>
+					</h2>
+					<div class="buttonHolderRight">
+						<a href="{$var|geturl:'add'}&module={$modules.module}" class="button icon iconAdd" title="{$lblAdd|ucfirst}">
+							<span>{$lblAdd|ucfirst}</span>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class="dataGridHolder">
-				{$modules.dataGrid}
-			</div>
-		{/iteration:modules}
+				<div class="dataGridHolder hidden">
+					{$modules.dataGrid}
+				</div>
+			{/iteration:modules}
+		</div>
 	{/option:modules}
 {/option:items}
 {option:!modules}
