@@ -150,12 +150,12 @@ jsFrontend.visitors =
 
 		/*
 			let's determine the max and min time before the appearance of a new pin
-			Calculation: 300 seconds / amount of pins = basic Interval to see all pins in 5 minutes
+			Calculation: 120 seconds / amount of pins = basic Interval to see all pins in 5 minutes
 			we add a margin of two seconds in each direction to make it more random.
 
-			When there are more then 150 pins, we make sure the minInterval is 0
+			When there are more then 60 pins, we make sure the minInterval is 0
 		*/
-		var baseInterval = 300000 / visitors.length;
+		var baseInterval = 120000 / visitors.length;
 		var maxInterval = baseInterval + 2000;
 		var minInterval = baseInterval - 2000;
 		if(minInterval < 0) minInterval = 0;
